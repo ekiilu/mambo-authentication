@@ -1,0 +1,13 @@
+= render({:partial => 'shared/errors', :object => @credentials})
+= form_for(@credentials, :url => sessions_path) do |f|
+  %fieldset
+    %legend
+      = t(:session_new)
+    %ol
+      %li
+        = f.label(:email_address)
+        = f.email_field(:email_address, :required => true)
+      %li
+        = f.label(:password)
+        = f.password_field(:password, :required => true)
+    = f.submit(t(:session_new_commit), :disable_with => t(:session_new_commit_disable))

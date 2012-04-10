@@ -1,0 +1,8 @@
+= content_tag_for(:li, user, :class => 'item') do
+  %h3
+    = link_to(user.name, edit_user_path(user))
+  = mail_to(user.email_address)
+  %br/
+  %br/
+  %div
+    = link_to(t(:user_destroy_link), user_path(user), {:confirm => t(:user_destroy_confirmation), :method => :delete, :class => 'button'})

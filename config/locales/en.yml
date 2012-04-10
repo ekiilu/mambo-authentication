@@ -1,0 +1,46 @@
+en:
+  # general
+  cancel: "Cancel"
+  save: "Save"
+  saving: "Saving..."
+  edit: "Edit"
+  edit_link: "Edit..."
+  delete_link: "Delete..."
+  created_at: "Created At"
+  updated_at: "Updated At"
+  logout: "Logout"
+
+  ## sessions
+  session_new: "Login"
+  session_new_link: "Login..."
+  session_new_commit: "Login"
+  session_new_commit_disable: "Logging in..."
+  session_created: "Login Successful"
+  session_create_failed: "Login Failed"
+  session_destroyed: "Logout Successful"
+
+  ## users
+  users: "Users"
+  users_link: "Users"
+  user: "User"
+  user_new: "New User"
+  user_new_link: "Add a User..."
+  user_created: "User Created"
+  user_edit: "Edit User"
+  user_edit_link: "Edit User..."
+  user_updated: "User Updated"
+  user_destroy_link: "Delete User..."
+  user_destroy_confirmation: "Are you sure you want to delete this user?"
+  user_destroyed: "User Deleted"
+
+  helpers:
+    label:
+      credentials:
+        email_address: "Email Address"
+
+      user:
+        email_address: "Email Address"
+        password_confirmation: "Confirm Password"
+
+      subscriber:
+        phone_number: "Phone Number"
