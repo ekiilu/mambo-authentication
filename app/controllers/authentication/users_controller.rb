@@ -1,7 +1,6 @@
 module Authentication
 	class UsersController < AuthenticatedController
 		respond_to(:html)
-		layout("authentication")
 
 		# list users
 		def index

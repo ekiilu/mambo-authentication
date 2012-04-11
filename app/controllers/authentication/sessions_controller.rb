@@ -1,7 +1,6 @@
 module Authentication
 	class SessionsController < BaseController
 		respond_to(:html)
-		layout("authentication")
 
 		# new session form
 		def new

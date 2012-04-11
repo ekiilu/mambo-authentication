@@ -1,6 +1,5 @@
 module Authentication
-	class AuthenticatedController < ActionController::Base
-		include AuthenticatedUser
+	class AuthenticatedController < BaseController
 		before_filter(:requires_authentication)
 
 		#
