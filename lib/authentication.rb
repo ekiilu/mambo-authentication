@@ -1,5 +1,6 @@
 require "authentication/version"
 require "authentication/engine"
+require "authentication/authenticated_user"
 
 require "dm-rails"
 require "dm-types"
