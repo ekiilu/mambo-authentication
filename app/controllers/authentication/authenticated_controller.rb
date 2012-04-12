@@ -6,7 +6,7 @@ module Authentication
 		def requires_authentication
 			if authenticated_user.nil?
 				session[:back] = request.url
-				redirect_to(main_app.root_path)
+				redirect_to(new_session_path)
 			end
 		end
 	end
