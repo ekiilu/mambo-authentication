@@ -38,7 +38,7 @@ module Authentication
 			# success
 			session[:user_id] = @session.user.id
 
-			respond_with(@session, :location => session[:back] || home_path(@session.user))
+			respond_with(@session, :location => session[:back] || :root)
 		end
 
 		# destroy session
