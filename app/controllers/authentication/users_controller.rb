@@ -1,6 +1,8 @@
 module Authentication
-	class UsersController < AuthenticatedController
+	class UsersController < BaseController
+		include AuthenticatedController
 		respond_to(:html)
+		layout("private/authentication")
 
 		# list users
 		def index
@@ -19,7 +21,7 @@ module Authentication
 		def create
 			begin
 				@user = User.create_by(params[:user])
-				flash[:notice] = t(:user_created)
+				flash[:notice] = t(:created)
 				respond_with(@user, :location => users_path)
 
 			rescue DataMapper::SaveFailureError => error
@@ -40,7 +42,7 @@ module Authentication
 		def update
 			begin
 				@user = User.update_by_id(params[:id], params[:user])
-				flash[:notice] = t(:user_updated)
+				flash[:notice] = t(:updated)
 				redirect_to(users_path)
 
 			rescue DataMapper::SaveFailureError => error
@@ -54,8 +56,14 @@ module Authentication
 		# destroy user
 		def destroy
 			@user = User.destroy_by_id(params[:id])
-			flash[:notice] = t(:user_destroyed)
+			flash[:notice] = t(:destroyed)
 			respond_with(@user, :location => users_path)
+		end
+
+	private
+		#
+		def t(key)
+			I18n.t(key, :scope => [:authentication, :users])
 		end
 	end
 end

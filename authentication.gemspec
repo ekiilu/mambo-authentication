@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 	s.test_files = Dir["test/**/*"]
 
   # specify any dependencies here; for example:
-  s.add_runtime_dependency "rails", "~> 3.1"
+  s.add_runtime_dependency "rails", Authentication::RAILS_VERSION
 	s.add_runtime_dependency "dm-rails", Authentication::DM_VERSION
 	s.add_runtime_dependency "dm-types", Authentication::DM_VERSION
 	s.add_runtime_dependency "dm-validations", Authentication::DM_VERSION

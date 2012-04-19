@@ -1,10 +1,11 @@
-= link_to(t(:user_new_link), new_user_path, :class => 'button')
+= content_for(:actions) do
+  = link_to(t(".new_link"), new_user_path, :class => "button")
 
 - if @users.empty?
-  No Users
+  = t(".no_users")
 - else
   %ol#user_list.list
-    = render({:collection => @users, :partial => 'item', :as => :user})
+    = render({:collection => @users, :partial => "item", :as => :user})
 
-- content_for :footer do
-  = raw(@users.pager.to_html(''))
+- content_for(:footer) do
+  = raw(@users.pager.to_html(""))

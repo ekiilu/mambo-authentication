@@ -7,8 +7,11 @@ module Authentication
 			:in_memory
 		end
 
+		# properties
+		property(:id, Serial)
+
 		# associations
-		belongs_to(:user, :key => true)
+		belongs_to(:user, "Authentication::User")
 
 		# class methods
 		#

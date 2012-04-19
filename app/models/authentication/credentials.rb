@@ -2,6 +2,7 @@ module Authentication
 	class Credentials
 		include DataMapper::Resource
 
+		#
 		def self.default_repository_name
 			:in_memory
 		end
