@@ -69,5 +69,3 @@ module Authentication
 		end
 	end
 end
-
-Rails.logger.debug(Authentication::User.inspect)
