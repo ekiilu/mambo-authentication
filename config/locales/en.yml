@@ -17,8 +17,8 @@ en:
         no_users: "No Users"
         new_link: "Add User..."
       item:
-        destroy_link: "Delete User..."
-        destroy_disable: "Deleting User..."
+        destroy_link: "Delete"
+        destroy_disable: "Deleting..."
         destroy_confirmation: "Are you sure you want to delete this user?"
       form:
         legend: "User"
