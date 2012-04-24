@@ -10,6 +10,10 @@
         = u.label(:email_address)
         = u.email_field(:email_address, {:required => true, :placeholder => "example@domain.com"})
       %li
+        = u.fields_for(:user_roles) do |ur|
+          = ur.label(:role_id)
+          = ur.select(:role_id, options_from_collection_for_select(Authentication::Role.all, :id, :desc, :selected => @user.user_roles.first.role_id))
+      %li
         = u.label(:password)
         = u.password_field(:password)
       %li

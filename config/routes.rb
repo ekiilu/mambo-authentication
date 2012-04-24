@@ -6,4 +6,7 @@ Authentication::Engine.routes.draw do
 
 	# users
 	resources(:users, :only => [:index, :new, :create, :edit, :update, :destroy])
+
+	# roles
+	resources(:roles, :only => [:index, :new, :create, :edit, :update, :destroy])
 end

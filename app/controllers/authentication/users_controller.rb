@@ -14,6 +14,7 @@ module Authentication
 		# new user form
 		def new
 			@user = User.new
+			@user.user_roles.new
 			respond_with(@user)
 		end
 

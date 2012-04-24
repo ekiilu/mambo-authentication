@@ -1,0 +1,11 @@
+= content_for(:actions) do
+  = link_to(t(".new_link"), new_role_path, :class => "button")
+
+- if @roles.empty?
+  = t(".no_roles")
+- else
+  %ol#role_list.list
+    = render({:collection => @roles, :partial => "item", :as => :role})
+
+- content_for(:footer) do
+  = raw(@roles.pager.to_html(""))

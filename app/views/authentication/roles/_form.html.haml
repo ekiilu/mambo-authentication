@@ -1,0 +1,11 @@
+= render({:partial => "shared/errors", :object => @role})
+= form_for(@role) do |r|
+  %fieldset
+    %legend= t(".legend")
+    %ol
+      %li
+        = r.label(:desc)
+        = r.text_field(:desc, :required => true)
+  %fieldset
+    = link_to(t(".cancel"), roles_path, :class => "button")
+    = r.submit(t(".commit"), :disable_with => t(".commit_disable"))

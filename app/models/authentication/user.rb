@@ -21,15 +21,26 @@ module Authentication
 		validates_length_of(:password, {:in => 6..32, :allow_blank => true})
 		validates_confirmation_of(:password, {:confirm => :password_confirmation, :allow_blank => true})
 
+		# associations
+		has(n, :user_roles, "Authentication::UserRole", :constraint => :destroy)
+		has(n, :roles, "Authentication::Role", :through => :user_roles)
+
+		# nested
+		accepts_nested_attributes_for(:user_roles)
+
 		# attributes
 		attr_accessor(:password_confirmation)
-
 		attr_reader(:password)
 
 		def password=(password)
 			return if password.nil?
 			@password = password
 			self.password_digest = User.digest(password)
+		end
+
+		# instance methods
+		def has_role(role)
+			roles.first(:name => role.to_s) != nil
 		end
 
 		# class methods
