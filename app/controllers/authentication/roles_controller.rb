@@ -1,4 +1,4 @@
-module Authorization
+module Authentication
 	class RolesController < BaseController
 		include Authentication::AuthenticatedController
 		respond_to(:html)
