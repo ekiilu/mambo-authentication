@@ -22,8 +22,8 @@ module Authentication
 		validates_confirmation_of(:password, {:confirm => :password_confirmation, :allow_blank => true})
 
 		# associations
-		has(n, :user_roles, "Authentication::UserRole", :constraint => :destroy)
-		has(n, :roles, "Authentication::Role", :through => :user_roles)
+		has(n, :user_roles, Authentication::UserRole, :constraint => :destroy)
+		has(n, :roles, Authentication::Role, :through => :user_roles)
 
 		# nested
 		accepts_nested_attributes_for(:user_roles)
@@ -51,12 +51,15 @@ module Authentication
 
 		# get by credentials
 		def self.get_by_credentials(credentials)
-			user = User.first(:email_address => credentials.email_address)
+			first(
+				:email_address => credentials.email_address,
+				:password_digest => digest(credentials.password)
+			)
 		end
 
 		# create new user
 		def self.create_by(params)
-			User.create(params)
+			create(params)
 		end
 
 		# update user

@@ -16,9 +16,7 @@ module Authentication
 		# class methods
 		#
 		def self.create_by(credentials)
-			session = Session.new
-			session.user = User.get_by_credentials(credentials)
-			session
+			new(:user => User.get_by_credentials(credentials))
 		end
 	end
 end

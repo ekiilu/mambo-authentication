@@ -17,8 +17,8 @@ module Authentication
 		validates_length_of(:desc, :in => 2..64)
 
 		# associations
-		has(n, :user_roles, "Authentication::UserRole", :constraint => :destroy)
-		has(n, :users, "Authentication::User", :through => :user_roles)
+		has(n, :user_roles, Authentication::UserRole, :constraint => :destroy)
+		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
 

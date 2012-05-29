@@ -6,7 +6,7 @@ module Authentication
 		property(:id, Serial)
 
 		# associations
-		belongs_to(:user, "Authentication::User",)
-		belongs_to(:role, "Authentication::Role",)
+		belongs_to(:user, Authentication::User)
+		belongs_to(:role, Authentication::Role)
 	end
 end
