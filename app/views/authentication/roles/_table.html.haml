@@ -1,0 +1,7 @@
+%table
+  %tr
+    %th= t(".name")
+    %th= t(".desc")
+    %th= t(".updated_at")
+    %th= t(".actions")
+  = render(:collection => @roles, :partial => "row", :as => :role)

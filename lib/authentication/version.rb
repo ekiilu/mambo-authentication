@@ -1,5 +1,4 @@
 module Authentication
-  VERSION = "0.0.6"
-  RAILS_VERSION = "~> 3.1"
+  VERSION = "0.0.7"
   DM_VERSION = "~> 1.2"
 end

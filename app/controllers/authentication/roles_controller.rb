@@ -2,11 +2,12 @@ module Authentication
 	class RolesController < BaseController
 		include AuthenticatedController
 		respond_to(:html)
+		layout("private/authentication")
 
 		#
 		def index
 			@page = params[:page]
-			@roles = Role.all.page(:page => @page, :per_page => 6, :order => :name)
+			@roles = Role.search(@page, 20, :name)
 			respond_with(@roles)
 		end
 
@@ -18,7 +19,7 @@ module Authentication
 		#
 		def create
 			begin
-				@role = Authorization::Role.create_by(params[:role])
+				@role = Authentication::Role.create_by(params[:role])
 				flash[:notice] = t(:created)
 				redirect_to(roles_path)
 
@@ -38,7 +39,7 @@ module Authentication
 		#
 		def update
 			begin
-				@role = Authorization::Role.update_by_id(params[:id], params[:role])
+				@role = Authentication::Role.update_by_id(params[:id], params[:role])
 				flash[:notice] = t(:updated)
 				redirect_to(roles_path)
 
@@ -52,7 +53,7 @@ module Authentication
 
 		#
 		def destroy
-			@role = Role.destroy_by_id(params[:id])
+			@role = Authentication::Role.destroy_by_id(params[:id])
 			flash[:notice] = t(:destroyed)
 			respond_with(@role, :location => roless_path)
 		end
@@ -60,7 +61,7 @@ module Authentication
 	private
 		#
 		def t(key)
-			I18n.t(key, :scope => [:authorization, :roles])
+			I18n.t(key, :scope => [:authentication, :roles])
 		end
 	end
 end

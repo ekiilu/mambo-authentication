@@ -1,0 +1,7 @@
+%table
+  %tr
+    %th= t(".name")
+    %th= t(".email_address")
+    %th= t(".updated_at")
+    %th= t(".actions")
+  = render(:collection => @users, :partial => "row", :as => :user)

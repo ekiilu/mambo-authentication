@@ -7,7 +7,7 @@ module Authentication
 		# list users
 		def index
 			@page = params[:page]
-			@users = User.search(@page, 6)
+			@users = User.search(@page, 20, :name)
 			respond_with(@users)
 		end
 

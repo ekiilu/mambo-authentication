@@ -11,12 +11,12 @@ module Authentication
 		property(:id, Serial)
 
 		# associations
-		belongs_to(:user, "Authentication::User")
+		belongs_to(:user, Authentication::User)
 
 		# class methods
 		#
 		def self.create_by(credentials)
-			new(:user => User.get_by_credentials(credentials))
+			new(:user => User.first_by_credentials(credentials))
 		end
 	end
 end

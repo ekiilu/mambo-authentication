@@ -21,15 +21,19 @@ module Authentication
 		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
+		# search
+		def self.search(page, per_page, order)
+			page(:page => page, :per_page => per_page, :order => [order])
+		end
 
 		# create new role
 		def self.create_by(params)
-			Role.create(params)
+			create(params)
 		end
 
 		# update role
 		def self.update_by_id(id, params)
-			role = Role.get!(id)
+			role = get!(id)
 			role.attributes = params
 			role.save
 			role
@@ -37,7 +41,7 @@ module Authentication
 
 		# destroy role
 		def self.destroy_by_id(id)
-			role = Role.get!(id)
+			role = get!(id)
 			role.destroy
 			role
 		end

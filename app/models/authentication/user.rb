@@ -45,12 +45,12 @@ module Authentication
 
 		# class methods
 		#
-		def self.search(page, per_page)
-			page(page, {:per_page => per_page, :order => [:name]})
+		def self.search(page, per_page, order)
+			page(:page => page, :per_page => per_page, :order => [order])
 		end
 
 		# get by credentials
-		def self.get_by_credentials(credentials)
+		def self.first_by_credentials(credentials)
 			first(
 				:email_address => credentials.email_address,
 				:password_digest => digest(credentials.password)
