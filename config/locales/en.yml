@@ -37,7 +37,7 @@ en:
       destroyed: "Role Deleted"
       index:
         no_roles: "No Roles"
-        new_link: "New Role"
+        new_link: "Add Role..."
       table:
         name: "Name"
         desc: "Description"
