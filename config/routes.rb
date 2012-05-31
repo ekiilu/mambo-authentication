@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Authentication::Engine.routes.draw do
 	root(:to => "sessions#new")
 

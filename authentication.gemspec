@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
 	s.add_development_dependency "dm-rails", Authentication::DM_VERSION
 	s.add_development_dependency "dm-migrations", Authentication::DM_VERSION
 	s.add_development_dependency "dm-sqlite-adapter", Authentication::DM_VERSION
-	s.add_development_dependency "combustion"
 	s.add_development_dependency "database_cleaner"
+	s.add_development_dependency "combustion"
+	s.add_development_dependency "magic_encoding"
 end

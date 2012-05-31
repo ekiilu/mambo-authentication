@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require "authentication/version"
 require "authentication/engine"
 require "authentication/authenticated_user"

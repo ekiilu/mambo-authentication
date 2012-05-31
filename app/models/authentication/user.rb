@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Authentication
 	class User
 		include DataMapper::Resource
