@@ -5,10 +5,14 @@ module Authentication
 		respond_to(:html)
 		layout("private/authentication")
 
+    before_filter(:only => :index) do
+      sort_param(:roles)
+      session_param(:page, :roles)
+    end
+
 		#
 		def index
-			@page = params[:page]
-			@roles = Role.search(@page, 20, :name)
+			@roles = Role.paginate(@page, 20, valid_sort)
 			respond_with(@roles)
 		end
 

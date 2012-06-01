@@ -56,8 +56,8 @@ module Authentication
 		end
 
 		#
-		def self.search(page, per_page, order)
-			page(:page => page, :per_page => per_page, :order => [order])
+		def self.paginate(page, per_page, options = {})
+			page({:page => page, :per_page => per_page}.merge(options))
 		end
 
 		# get by credentials

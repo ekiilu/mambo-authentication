@@ -23,9 +23,9 @@ module Authentication
 		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
-		# search
-		def self.search(page, per_page, order)
-			page(:page => page, :per_page => per_page, :order => [order])
+		# paginate
+		def self.paginate(page, per_page, options = {})
+			page({:page => page, :per_page => per_page}.merge(options))
 		end
 
 		# create new role
