@@ -5,7 +5,7 @@
     %ol
       %li
         = r.label(:name)
-        = r.text_field(:name, :required => true)
+        = r.text_field(:name, {:required => true, :disabled => @role.system})
       %li
         = r.label(:desc)
         = r.text_field(:desc, :required => true)

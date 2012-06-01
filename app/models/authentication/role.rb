@@ -5,6 +5,7 @@ module Authentication
 
 		# properties
 		property(:id, Serial)
+		property(:system, Boolean, {:required => true, :default => false})
 		property(:name, String, {:unique => true, :length => 64})
 		property(:desc, String, {:unique => true, :required => true, :length => 64})
 		property(:created_at, DateTime)

@@ -1,6 +1,5 @@
 = content_tag_for(:tr, user, :class => "item") do
-
-  %td= link_to(user.name, edit_user_path(user))
+  %td= user.name
 
   %td= mail_to(user.email_address)
 
@@ -8,6 +7,12 @@
 
   %td
     = link_to( |
-      t(".destroy_link"), |
-      user_path(user), |
-      {:confirm => t(".destroy_confirmation"), :disable_with => t(".destroy_disable"), :method => :delete, :class => "button"})
+        t(".edit_link"), |
+        edit_user_path(user), |
+        :class => "button")
+
+    - if not user.system
+      = link_to( |
+          t(".destroy_link"), |
+          user_path(user), |
+          {:confirm => t(".destroy_confirmation"), :data => {:disable_with => t(".destroy_disable")}, :method => :delete, :class => "button"})

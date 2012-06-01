@@ -5,8 +5,10 @@ module Authentication
 
 		# properties
 		property(:id, Serial)
+		property(:system, Boolean, {:required => true, :default => false})
 		property(:name, String, {:unique => true, :required => true, :length => 64})
 		property(:email_address, String, {:unique => true, :required => true})
+		property(:phone_number, String, {:unique => true, :length => 10})
 		property(:password_digest, String)
 		property(:created_at, DateTime)
 		property(:updated_at, DateTime)
@@ -17,6 +19,9 @@ module Authentication
 
 		validates_format_of(:email_address, :as => :email_address)
 		validates_length_of(:email_address, :max => 128)
+
+		validates_length_of(:phone_number, :is => 10, :allow_blank => true)
+		validates_format_of(:phone_number, :with => /^\d*$/, :allow_blank => true)
 
 		validates_format_of(:password, {:with => /^\w*$/, :allow_blank => true})
 		validates_length_of(:password, {:in => 6..32, :allow_blank => true})
@@ -45,6 +50,11 @@ module Authentication
 		end
 
 		# class methods
+		#
+		def self.with_phone_number
+			all(:phone_number.not => nil)
+		end
+
 		#
 		def self.search(page, per_page, order)
 			page(:page => page, :per_page => per_page, :order => [order])
