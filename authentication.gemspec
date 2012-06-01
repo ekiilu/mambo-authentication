@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "mambo-authentication"
 
 	s.files = Dir["{app,config,lib}/**/*"] + ["Rakefile"]
-	s.test_files = Dir["test/**/*"]
 
   # specify any dependencies here; for example:
   s.add_runtime_dependency "rails"
@@ -25,8 +24,8 @@ Gem::Specification.new do |s|
 	s.add_runtime_dependency "dm-constraints", Authentication::DM_VERSION
 	s.add_runtime_dependency "dm-transactions", Authentication::DM_VERSION
 	s.add_runtime_dependency "dm-timestamps", Authentication::DM_VERSION	
-	s.add_runtime_dependency "dm-pager"
 	s.add_runtime_dependency "dm-accepts_nested_attributes"
+	s.add_runtime_dependency "dm-pager"
 	s.add_runtime_dependency "haml-rails"
 	
 	s.add_development_dependency "rspec-rails"
