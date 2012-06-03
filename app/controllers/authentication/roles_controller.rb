@@ -12,7 +12,7 @@ module Authentication
 
 		#
 		def index
-			@roles = Role.paginate(@page, 20, valid_sort)
+			@roles = Role.all(valid_sort).paginate(:page => @page, :per_page => 20)
 			respond_with(@roles)
 		end
 

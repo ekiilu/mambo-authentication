@@ -7,4 +7,4 @@
   = render("table")
 
 - content_for(:footer) do
-  = raw(@roles.pager.to_html(""))
+  = will_paginate(@roles)

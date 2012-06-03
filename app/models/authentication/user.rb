@@ -55,11 +55,6 @@ module Authentication
 			all(:phone_number.not => nil)
 		end
 
-		#
-		def self.paginate(page, per_page, options = {})
-			page({:page => page, :per_page => per_page}.merge(options))
-		end
-
 		# get by credentials
 		def self.first_by_credentials(credentials)
 			first(

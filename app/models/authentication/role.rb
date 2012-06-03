@@ -23,11 +23,6 @@ module Authentication
 		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
-		# paginate
-		def self.paginate(page, per_page, options = {})
-			page({:page => page, :per_page => per_page}.merge(options))
-		end
-
 		# create new role
 		def self.create_by(params)
 			create(params)

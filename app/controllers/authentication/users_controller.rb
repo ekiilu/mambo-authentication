@@ -12,7 +12,7 @@ module Authentication
 
 		# list users
 		def index
-			@users = User.paginate(@page, 20, valid_sort)
+			@users = User.all(valid_sort).paginate(:page => @page, :per_page => 20)
 			respond_with(@users)
 		end
 
