@@ -1,13 +1,18 @@
+# -*- encoding : utf-8 -*-
 module Authentication
 	class UsersController < BaseController
 		include AuthenticatedController
 		respond_to(:html)
 		layout("private/authentication")
 
+    before_filter(:only => :index) do
+    	page_param(:users)
+      sort_param(:users, :name, :asc)
+    end
+
 		# list users
 		def index
-			@page = params[:page]
-			@users = User.search(@page, 6)
+			@users = User.sorted_by(@sort_key, @sort_order).paginate(:page => @page, :per_page => 20)
 			respond_with(@users)
 		end
 

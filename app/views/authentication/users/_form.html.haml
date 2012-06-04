@@ -8,11 +8,14 @@
         = u.text_field(:name, :required => true)
       %li
         = u.label(:email_address)
-        = u.email_field(:email_address, {:required => true, :placeholder => "example@domain.com"})
+        = u.email_field(:email_address, {:required => true, :placeholder => "example@domain.com", :disabled => @user.system})
+      %li
+        = u.label(:phone_number)
+        = u.telephone_field(:phone_number, {:required => true, :placeholder => "2223334444", :size => 10, :maxlength => 10})
       %li
         = u.fields_for(:user_roles) do |ur|
           = ur.label(:role_id)
-          = ur.select(:role_id, options_from_collection_for_select(Authentication::Role.all, :id, :desc, :selected => @user.user_roles.first.role_id))
+          = ur.select(:role_id, options_from_collection_for_select(Authentication::Role.all, :id, :desc, :selected => @user.user_roles.first.role_id), {}, :disabled => @user.system)
       %li
         = u.label(:password)
         = u.password_field(:password)

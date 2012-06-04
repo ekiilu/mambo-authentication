@@ -1,0 +1,18 @@
+= content_tag_for(:tr, role, :class => "item") do
+  %td= role.name
+
+  %td= role.desc
+
+  %td= l(role.updated_at)
+
+  %td
+    = link_to( |
+        t(".edit_link"), |
+        edit_role_path(role), |
+        :class => "button")
+
+    - if not role.system
+      = link_to( |
+          t(".destroy_link"), |
+          role_path(role), |
+           {:confirm => t(".destroy_confirmation"), :data => {:disable_with => t(".destroy_disable")}, :method => :delete, :class => "button"})

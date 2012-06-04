@@ -1,9 +1,11 @@
+# -*- encoding : utf-8 -*-
 module Authentication
 	class Role
 		include DataMapper::Resource
 
 		# properties
 		property(:id, Serial)
+		property(:system, Boolean, {:required => true, :default => false})
 		property(:name, String, {:unique => true, :length => 64})
 		property(:desc, String, {:unique => true, :required => true, :length => 64})
 		property(:created_at, DateTime)
@@ -21,15 +23,19 @@ module Authentication
 		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
+		#
+		def self.sorted_by(key, order)
+			all(:order => [key.send(order)])
+		end
 
 		# create new role
 		def self.create_by(params)
-			Role.create(params)
+			create(params)
 		end
 
 		# update role
 		def self.update_by_id(id, params)
-			role = Role.get!(id)
+			role = get!(id)
 			role.attributes = params
 			role.save
 			role
@@ -37,7 +43,7 @@ module Authentication
 
 		# destroy role
 		def self.destroy_by_id(id)
-			role = Role.get!(id)
+			role = get!(id)
 			role.destroy
 			role
 		end

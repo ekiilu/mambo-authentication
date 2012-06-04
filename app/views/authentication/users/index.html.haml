@@ -4,8 +4,7 @@
 - if @users.empty?
   = t(".no_users")
 - else
-  %ol#user_list.list
-    = render({:collection => @users, :partial => "item", :as => :user})
+  = render("table")
 
 - content_for(:footer) do
-  = raw(@users.pager.to_html(""))
+  = will_paginate(@users)

@@ -4,6 +4,9 @@
     %legend= t(".legend")
     %ol
       %li
+        = r.label(:name)
+        = r.text_field(:name, {:required => true, :disabled => @role.system})
+      %li
         = r.label(:desc)
         = r.text_field(:desc, :required => true)
   %fieldset

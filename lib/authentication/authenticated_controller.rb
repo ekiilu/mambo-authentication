@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require "authentication/authenticated_user"
 
 module Authentication
