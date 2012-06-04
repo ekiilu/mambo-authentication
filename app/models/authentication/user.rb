@@ -51,6 +51,11 @@ module Authentication
 
 		# class methods
 		#
+		def self.sorted_by(key, order)
+			all(:order => [key.send(order)])
+		end
+
+		#
 		def self.with_phone_number
 			all(:phone_number.not => nil)
 		end

@@ -6,13 +6,13 @@ module Authentication
 		layout("private/authentication")
 
     before_filter(:only => :index) do
-      sort_param(:roles)
-      session_param(:page, :roles)
+      page_param(:roles)
+      sort_param(:roles, :name, :asc)
     end
 
 		#
 		def index
-			@roles = Role.all(valid_sort).paginate(:page => @page, :per_page => 20)
+			@roles = Role.sorted_by(@sort_key, @sort_order).paginate(:page => @page, :per_page => 20)
 			respond_with(@roles)
 		end
 

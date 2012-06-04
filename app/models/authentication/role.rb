@@ -23,6 +23,11 @@ module Authentication
 		has(n, :users, Authentication::User, :through => :user_roles)
 
 		# class methods
+		#
+		def self.sorted_by(key, order)
+			all(:order => [key.send(order)])
+		end
+
 		# create new role
 		def self.create_by(params)
 			create(params)
