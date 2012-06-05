@@ -11,7 +11,7 @@
         = u.email_field(:email_address, {:required => true, :placeholder => "example@domain.com", :disabled => @user.system})
       %li
         = u.label(:phone_number)
-        = u.telephone_field(:phone_number, {:required => true, :placeholder => "2223334444", :size => 10, :maxlength => 10})
+        = u.telephone_field(:phone_number, {:placeholder => "2223334444", :size => 10, :maxlength => 10})
       %li
         = u.fields_for(:user_roles) do |ur|
           = ur.label(:role_id)

@@ -57,7 +57,7 @@ module Authentication
 
 		#
 		def self.with_phone_number
-			all(:phone_number.not => nil)
+			all(:phone_number.not => nil) & all(:phone_number.not => "")
 		end
 
 		# get by credentials
