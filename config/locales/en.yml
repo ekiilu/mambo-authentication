@@ -65,13 +65,10 @@ en:
 
   helpers:
     label:
-      credentials:
+      "authentication/credentials":
         email_address: "Email Address"
 
-      user:
+      "authentication/user":
         email_address: "Email Address"
-        phone_number: "Phone Number"
+        phone_number: "Phone Number (for Alerts)"
         password_confirmation: "Confirm Password"
-
-      subscriber:
-        phone_number: "Phone Number"
