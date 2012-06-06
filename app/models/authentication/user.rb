@@ -39,7 +39,7 @@ module Authentication
 		attr_reader(:password)
 
 		def password=(password)
-			return if password.nil?
+			return if password.blank?
 			@password = password
 			self.password_digest = User.digest(password)
 		end
