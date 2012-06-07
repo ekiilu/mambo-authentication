@@ -39,7 +39,7 @@ module Authentication
 		attr_reader(:password)
 
 		def password=(password)
-			return if password.nil?
+			return if password.blank?
 			@password = password
 			self.password_digest = User.digest(password)
 		end
@@ -57,7 +57,7 @@ module Authentication
 
 		#
 		def self.with_phone_number
-			all(:phone_number.not => nil)
+			all(:phone_number.not => nil) & all(:phone_number.not => "")
 		end
 
 		# get by credentials
