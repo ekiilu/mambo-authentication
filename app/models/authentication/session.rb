@@ -1,22 +1,29 @@
 # -*- encoding : utf-8 -*-
 module Authentication
 	class Session
-		include DataMapper::Resource
+    include ActiveModel::Validations
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
 
-		#
-		def self.default_repository_name
-			:in_memory
-		end
+		# attributes
+    attr_accessor(:user)
 
-		# properties
-		property(:id, Serial)
+    # instance methods
+    #
+    def initialize(attributes = {})
+      attributes.each do |name, value|
+        send("#{name}=", value)
+      end
+    end
 
-		# associations
-		belongs_to(:user, Authentication::User)
+    #
+    def persisted?
+      false
+    end
 
 		# class methods
 		#
-		def self.create_by(credentials)
+		def self.new_by_credentials(credentials)
 			new(:user => User.first_by_credentials(credentials))
 		end
 	end

@@ -26,7 +26,8 @@ module Authentication
 		# create new user
 		def create
 			begin
-				@user = User.create_by(params[:user])
+        user = params[:user]
+				@user = User.create_by(user)
 				flash[:notice] = t(:created)
 				respond_with(@user, :location => users_path)
 
@@ -47,7 +48,9 @@ module Authentication
 		# update user
 		def update
 			begin
-				@user = User.update_by_id(params[:id], params[:user])
+        user = params[:user]
+        user.delete(:password) if user.password.blank?
+				@user = User.update_by_id(params[:id], user)
 				flash[:notice] = t(:updated)
 				redirect_to(users_path)
 

@@ -9,13 +9,7 @@ $:.push File.expand_path("../lib", __FILE__)
 $:.push File.expand_path("../app", __FILE__)
 
 # combustion
-Combustion.initialize!(:active_support, :action_controller, :action_view, :action_mailer, :sprockets)
-
-# datamapper
-DataMapper.finalize
-DataMapper.setup(:default, "sqlite:memory:")
-DataMapper.setup(:in_memory, "sqlite:memory:")
-DataMapper.auto_migrate!
+Combustion.initialize!(:active_support, :active_record, :action_controller, :action_view, :action_mailer, :sprockets)
 
 spec_path = File.expand_path("../", __FILE__)
 

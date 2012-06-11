@@ -24,7 +24,8 @@ module Authentication
 		#
 		def create
 			begin
-				@role = Authentication::Role.create_by(params[:role])
+        role = params[:role]
+				@role = Authentication::Role.create_by(role)
 				flash[:notice] = t(:created)
 				redirect_to(roles_path)
 
@@ -44,7 +45,8 @@ module Authentication
 		#
 		def update
 			begin
-				@role = Authentication::Role.update_by_id(params[:id], params[:role])
+        role = params[:role]
+				@role = Authentication::Role.update_by_id(params[:id], role)
 				flash[:notice] = t(:updated)
 				redirect_to(roles_path)
 

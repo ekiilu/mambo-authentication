@@ -1,13 +1,8 @@
 # -*- encoding : utf-8 -*-
 module Authentication
-	class UserRole
-		include DataMapper::Resource
-
-		# properties
-		property(:id, Serial)
-
+	class UserRole < ActiveRecord::Base
 		# associations
-		belongs_to(:user, Authentication::User)
-		belongs_to(:role, Authentication::Role)
+		belongs_to(:user)
+		belongs_to(:role)
 	end
 end

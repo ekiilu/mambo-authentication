@@ -1,1 +1,3 @@
-# -*- encoding : utf-8 -*-
+ActiveRecord::Schema.define do
+  #
+end

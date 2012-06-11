@@ -12,7 +12,8 @@ module Authentication
 
 		# create session
 		def create
-			@credentials = Credentials.new(params[:credentials])
+      credentials = params[:credentials]
+			@credentials = Credentials.new(credentials)
 
 			# invalid credentials
 			if !@credentials.valid?

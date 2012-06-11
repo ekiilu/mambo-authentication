@@ -1,22 +1,27 @@
 # -*- encoding : utf-8 -*-
 module Authentication
 	class Credentials
-		include DataMapper::Resource
+    include ActiveModel::Validations
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
 
-		#
-		def self.default_repository_name
-			:in_memory
-		end
-
-		# properties
-		property(:email_address, String, {:key => true, :required => true, :length => 128})
-		property(:password, String, :length => 32)
+    attr_accessor(:email_address, :password)
 
 		# validations
-		validates_length_of(:email_address, :max => 128)
-		validates_format_of(:email_address, :as => :email_address)
+		validates(:email_address, :length => {:maximum => 128}, :format => //)
+		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/)
 
-		validates_length_of(:password, :within => 6..32)
-		validates_format_of(:password, :with => /^\w*$/)
+    # instance methods
+    #
+    def initialize(attributes = {})
+      attributes.each do |name, value|
+        send("#{name}=", value)
+      end
+    end
+
+    #
+    def persisted?
+      false
+    end
 	end
 end
