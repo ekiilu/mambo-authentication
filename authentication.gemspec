@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "mambo-authentication"
 
 	s.files = Dir["{app,config,lib}/**/*"] + ["Rakefile"]
+	s.test_files = Dir["spec/**/*"]
 
   # specify any dependencies here; for example:
   s.add_runtime_dependency "rails"

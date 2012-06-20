@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string(:phone_number, :limit => 10)
       t.timestamps
     end
-    add_index(:autentication_users, :name, :unique => true)
-    add_index(:autentication_users, :email_address, :unique => true)
+    add_index(:authentication_users, :name, :unique => true)
+    add_index(:authentication_users, :email_address, :unique => true)
   end
 end
