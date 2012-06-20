@@ -2,7 +2,7 @@
 module Authentication
 	class Role < ActiveRecord::Base
     # attributes
-    attr_accessor(:system, :name, :desc)
+    attr_accessible(:system, :name, :desc)
 
 		# validations
     validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w_]*$/)

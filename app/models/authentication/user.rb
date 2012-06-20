@@ -2,7 +2,7 @@
 module Authentication
 	class User < ActiveRecord::Base
     # attributes
-    attr_accessor(:system, :name, :email_address, :phone_number, :password, :password_confirmation)
+    attr_accessible(:system, :name, :email_address, :phone_number, :password, :password_confirmation)
     attr_reader(:password)
 
 		#property(:id, Serial)
@@ -51,10 +51,10 @@ module Authentication
 
 		# get by credentials
 		def self.first_by_credentials(credentials)
-			first(
+			where(
 				:email_address => credentials.email_address,
 				:password_digest => digest(credentials.password)
-			)
+			).first
 		end
 
 		# create new user

@@ -6,6 +6,8 @@ describe Authentication::User do
 	it "creates a valid user" do
 		params = attributes_for(:user)
 
+		puts(params.class.name)
+
 		user = Authentication::User.create(params)
 
 		user.should be_valid
@@ -26,13 +28,13 @@ describe Authentication::User do
   it "doesn't find a user with bad credentials" do
     create(:user)
 
-    credentials = create(:credentials, :password => "bad")
+    credentials = build(:credentials, :password => "bad")
 
     user = Authentication::User::first_by_credentials(credentials)
 
     user.should be_nil
 
-    credentials = create(:credentials, :email_address => "bad@bad.bad")
+    credentials = build(:credentials, :email_address => "bad@bad.bad")
 
     user = Authentication::User::first_by_credentials(credentials)
 
