@@ -5,9 +5,6 @@ module Authentication
 
 		#
     initializer "models" do
-    	require "authentication/user"
-    	require "authentication/credentials"
-    	require "authentication/session"
 		end
 
 		#
