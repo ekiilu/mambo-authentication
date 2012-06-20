@@ -5,20 +5,11 @@ module Authentication
     attr_accessible(:system, :name, :email_address, :phone_number, :password, :password_confirmation)
     attr_reader(:password)
 
-		#property(:id, Serial)
-		#property(:system, Boolean, {:required => true, :default => false})
-		#property(:name, String, {:unique => true, :required => true, :length => 64})
-		#property(:email_address, String, {:unique => true, :required => true})
-		#property(:phone_number, String, {:unique => true, :length => 10})
-		#property(:password_digest, String)
-		#property(:created_at, DateTime)
-		#property(:updated_at, DateTime)
-
 		# validations
-    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w ]*$/)
-    validates(:email_address, :uniqueness => true, :length => {:maximum => 128}, :format => //)
+    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w]*$/)
+    validates(:email_address, :uniqueness => true, :length => {:maximum => 128}, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)
     validates(:phone_number, :length => {:is => 10}, :format => /^\d*$/, :allow_blank => true)
-		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/, :confirmation => true)
+		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/, :confirmation => true, :allow_blank => true)
 
 		# associations
 		has_many(:user_roles, :dependent => :destroy)
@@ -41,12 +32,12 @@ module Authentication
 		# class methods
 		#
 		def self.sorted_by(key, order)
-			all(:order => [key.send(order)])
+			order("#{key} " + order.to_s.upcase)
 		end
 
 		#
 		def self.with_phone_number
-			all(:phone_number.not => nil) & all(:phone_number.not => "")
+			where("phone_number IS NOT NULL AND phone_number != ?", "")
 		end
 
 		# get by credentials
@@ -64,14 +55,12 @@ module Authentication
 
 		# update user
 		def self.update_by_id(id, params)
-			user = get!(id)
-			user.update(params)
-			user
+			update(id, params)
 		end
 
 		# destroy user
 		def self.destroy_by_id(id)
-			user = get!(id)
+			user = find(id)
 			user.destroy
 			user
 		end
