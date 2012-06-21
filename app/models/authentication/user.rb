@@ -6,7 +6,7 @@ module Authentication
     attr_reader(:password)
 
 		# validations
-    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w]*$/)
+    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w_]*$/)
     validates(:email_address, :uniqueness => true, :length => {:maximum => 128}, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)
     validates(:phone_number, :length => {:is => 10}, :format => /^\d*$/, :allow_blank => true)
 		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/, :confirmation => true, :allow_blank => true)

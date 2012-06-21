@@ -5,7 +5,7 @@ require "rubygems"
 require "bundler"
 require "rails"
 
-Bundler.require(:default, :development, :assets) if defined?(Bundler)
+Bundler.require(:default, :assets, :development) if defined?(Bundler)
 
 $:.push File.expand_path("../lib", __FILE__)
 $:.push File.expand_path("../app", __FILE__)
@@ -13,10 +13,16 @@ $:.push File.expand_path("../app", __FILE__)
 # combustion
 Combustion.initialize!
 
+# shoulda
+require "shoulda-matchers"
+
+# engine routing
+#Support::EngineRouter.load_engine_routes(:authentication)
+#require "rails/application/route_inspector"
+
 spec_path = File.expand_path("../", __FILE__)
 
 # factory girl
-require "factory_girl"
 Dir[File.join(spec_path, "factories", "**", "*.rb")].each { |f| require f }
 
 # rspec
@@ -36,5 +42,5 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include(FactoryGirl::Syntax::Methods)
 end
