@@ -31,7 +31,7 @@ module Authentication
 				flash[:notice] = t(:created)
 				respond_with(@user, :location => users_path)
 
-			rescue DataMapper::SaveFailureError => error
+			rescue ActiveRecord::RecordInvalid => error
 				@user = error.resource
 				respond_with(@user) do |format|
 					format.html { render(:new) }
@@ -41,7 +41,7 @@ module Authentication
 
 		# edit user form
 		def edit
-			@user = User.get!(params[:id])
+			@user = User.find(params[:id])
 			respond_with(@user)
 		end
 
@@ -49,12 +49,12 @@ module Authentication
 		def update
 			begin
         user = params[:user]
-        user.delete(:password) if user.password.blank?
+        user.delete!(:password) if user[:password].blank?
 				@user = User.update_by_id(params[:id], user)
 				flash[:notice] = t(:updated)
 				redirect_to(users_path)
 
-			rescue DataMapper::SaveFailureError => error
+			rescue ActiveRecord::RecordInvalid => error
 				@user = error.resource
 				respond_with(@user) do |format|
 					format.html { render(:edit) }

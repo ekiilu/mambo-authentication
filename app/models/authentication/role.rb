@@ -15,7 +15,7 @@ module Authentication
 		# class methods
 		#
 		def self.sorted_by(key, order)
-			order("{#key} " + order.to_s.upcase)
+			order("#{key} " + order.to_s.upcase)
 		end
 
 		# create new role
@@ -25,9 +25,7 @@ module Authentication
 
 		# update role
 		def self.update_by_id(id, params)
-			role = find(id)
-      role.update(params)
-			role
+      update(id, params)
 		end
 
 		# destroy role

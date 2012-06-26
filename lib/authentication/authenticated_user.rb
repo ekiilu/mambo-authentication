@@ -10,7 +10,7 @@ module Authentication
 
 		#
 		def authenticated_user
-			if @authenticated_user.nil?
+			if @authenticated_user.nil? && session[:user_id]
 				@authenticated_user = User.find(session[:user_id])
 			end
 			@authenticated_user

@@ -3,7 +3,6 @@ ENV["RAILS_ENV"] ||= "test"
 
 require "rubygems"
 require "bundler"
-require "rails"
 
 Bundler.require(:default, :assets, :development) if defined?(Bundler)
 
@@ -12,13 +11,6 @@ $:.push File.expand_path("../app", __FILE__)
 
 # combustion
 Combustion.initialize!
-
-# shoulda
-require "shoulda-matchers"
-
-# engine routing
-#Support::EngineRouter.load_engine_routes(:authentication)
-#require "rails/application/route_inspector"
 
 spec_path = File.expand_path("../", __FILE__)
 
@@ -35,6 +27,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+  	Rails.logger.debug(example.full_description)
     DatabaseCleaner.start
   end
 

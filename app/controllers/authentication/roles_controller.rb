@@ -19,6 +19,7 @@ module Authentication
 		#
 		def new
 			@role = Role.new
+			respond_with(@role)
 		end
 
 		#
@@ -29,7 +30,7 @@ module Authentication
 				flash[:notice] = t(:created)
 				redirect_to(roles_path)
 
-			rescue DataMapper::SaveFailureError => error
+			rescue ActiveRecord::RecordInvalid => error
 				@role = error.resource
 				respond_with(@role) do |format|
 					format.html { render(:new) }
@@ -39,7 +40,8 @@ module Authentication
 
 		#
 		def edit
-			@role = Role.get!(params[:id])
+			@role = Role.find(params[:id])
+			respond_with(@role)
 		end
 
 		#
@@ -50,7 +52,7 @@ module Authentication
 				flash[:notice] = t(:updated)
 				redirect_to(roles_path)
 
-			rescue DataMapper::SaveFailureError => error
+			rescue ActiveRecord::RecordInvalid => error
 				@role = error.resource
 				respond_with(@role) do |format|
 					format.html { render(:edit) }
@@ -62,7 +64,7 @@ module Authentication
 		def destroy
 			@role = Authentication::Role.destroy_by_id(params[:id])
 			flash[:notice] = t(:destroyed)
-			respond_with(@role, :location => roless_path)
+			respond_with(@role, :location => roles_path)
 		end
 
 	private
