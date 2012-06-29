@@ -60,12 +60,12 @@ describe Authentication::UsersController do
 			before do
 				user = create(:user)
 				user_attributes = attributes_for(:user)
-				post(:update, :use_route => :authentication, :id => user.id, :user => user_attributes)
+				put(:update, :use_route => :authentication, :id => user.id, :user => user_attributes)
 			end
 
 			it { should assign_to(:user) }
+			it { should respond_with(:redirect) }
 			it { should set_the_flash }
-			#it { should redirect_to(:index) }
 		end
 
 		#
@@ -76,8 +76,8 @@ describe Authentication::UsersController do
 			end
 
 			it { should assign_to(:user) }
+			it { should respond_with(:redirect) }
 			it { should set_the_flash }
-			#it { should redirect_to(:index) }
 		end
 	end
 end
