@@ -3,7 +3,9 @@
 
   %td= mail_to(user.email_address)
 
-  %td= l(user.updated_at)
+  %td
+    - if !user.updated_at.nil?
+      = l(user.updated_at)
 
   %td
     = link_to( |
