@@ -3,7 +3,7 @@ module Authentication
   class Engine < Rails::Engine
     isolate_namespace Authentication
 
-    initializer "models" do
+    config.before_initialize do
       require "authentication/user"
       require "authentication/role"
       require "authentication/user_role"
