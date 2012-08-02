@@ -4,9 +4,13 @@ module Authentication
     isolate_namespace Authentication
 
     config.before_initialize do
+    	puts "BEFORE INIT"
+	    require "authentication/credentials"
+	    require "authentication/session"
       require "authentication/user"
       require "authentication/role"
       require "authentication/user_role"
+      puts "AFTER INIT"
     end
 
 		#
