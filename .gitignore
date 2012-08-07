@@ -3,4 +3,4 @@
 Gemfile.lock
 log/*
 pkg/*
-spec/internal/db/
+spec/internal/db/*.sqlite

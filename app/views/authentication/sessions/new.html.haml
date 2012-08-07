@@ -10,4 +10,4 @@
       %li
         = f.label(:password)
         = f.password_field(:password, :required => true)
-    = f.submit(t(".commit"), :disable_with => t(".commit_disable"))
+    = f.submit(t(".commit"), :data => {:disable_with => t(".commit_disable")})

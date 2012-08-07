@@ -26,7 +26,7 @@ module Authentication
 				return
 			end
 
-			@session = Session.create_by(@credentials)
+			@session = Session.new_by_credentials(@credentials)
 
 			if !@session.valid?
 				respond_to do |format|

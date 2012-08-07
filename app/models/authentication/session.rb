@@ -8,6 +8,9 @@ module Authentication
 		# attributes
     attr_accessor(:user)
 
+    # validations
+    validates(:user, :presence => true)
+
     # instance methods
     #
     def initialize(attributes = {})
