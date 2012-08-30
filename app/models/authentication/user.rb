@@ -48,23 +48,6 @@ module Authentication
 			).first
 		end
 
-		# create new user
-		def self.create_by(params)
-			create(params)
-		end
-
-		# update user
-		def self.update_by_id(id, params)
-			update(id, params)
-		end
-
-		# destroy user
-		def self.destroy_by_id(id)
-			user = find(id)
-			user.destroy
-			user
-		end
-
 		#
 		def self.digest(value)
 			Digest::SHA1.hexdigest(value)
