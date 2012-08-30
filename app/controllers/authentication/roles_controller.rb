@@ -6,13 +6,15 @@ module Authentication
 		layout("private/authentication")
 
     before_filter(:only => :index) do
-      page_param(:roles)
-      sort_param(:roles, :name, :asc)
+      page_param(:roles, 20)
+      sort_param(:roles, "", :name, :asc)
     end
 
 		#
 		def index
-			@roles = Role.sorted_by(@sort_key, @sort_order).paginate(:page => @page, :per_page => 20)
+			@roles = Role
+				.sorted_by(@sort_attribute, @sort_order)
+				.paginate(:page => @page, :per_page => @per_page)
 			respond_with(@roles)
 		end
 
@@ -25,13 +27,15 @@ module Authentication
 		#
 		def create
 			begin
-        role = params[:role]
-				@role = Authentication::Role.create_by(role)
-				flash[:notice] = t(:created)
-				redirect_to(roles_path)
+				Authentication::Role.transaction do
+					role = params[:role]
+					@role = Authentication::Role.create!(role)
+					flash[:notice] = t(:created)
+					redirect_to(roles_path)
+				end
 
 			rescue ActiveRecord::RecordInvalid => error
-				@role = error.resource
+				@role = error.record
 				respond_with(@role) do |format|
 					format.html { render(:new) }
 				end
@@ -47,10 +51,14 @@ module Authentication
 		#
 		def update
 			begin
-        role = params[:role]
-				@role = Authentication::Role.update_by_id(params[:id], role)
-				flash[:notice] = t(:updated)
-				redirect_to(roles_path)
+				Authentication::Role.transaction do
+					role = params[:role]
+					@role = Authentication::Role.find(params[:id])
+					@role.attributes = role
+					@role.save!
+					flash[:notice] = t(:updated)
+					redirect_to(roles_path)
+				end
 
 			rescue ActiveRecord::RecordInvalid => error
 				@role = error.resource
@@ -62,9 +70,12 @@ module Authentication
 
 		#
 		def destroy
-			@role = Authentication::Role.destroy_by_id(params[:id])
-			flash[:notice] = t(:destroyed)
-			respond_with(@role, :location => roles_path)
+			Authentication::Role.transaction do
+				@role = Authentication::Role.find(params[:id])
+				@role.destroy
+				flash[:notice] = t(:destroyed)
+				respond_with(@role, :location => roles_path)
+			end
 		end
 
 	private

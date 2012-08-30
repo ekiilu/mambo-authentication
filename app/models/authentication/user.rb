@@ -26,13 +26,13 @@ module Authentication
 
 		# instance methods
 		def has_role(role)
-			roles.first(:name => role.to_s) != nil
+			roles.exists?(:name => role.to_s)
 		end
 
 		# class methods
 		#
 		def self.sorted_by(key, order)
-			order("#{key} " + order.to_s.upcase)
+			order("#{key} #{order.to_s.upcase}")
 		end
 
 		#

@@ -6,13 +6,15 @@ module Authentication
 		layout("private/authentication")
 
     before_filter(:only => :index) do
-    	page_param(:users)
-      sort_param(:users, :name, :asc)
+    	page_param(:users, 20)
+      sort_param(:users, "", :name, :asc)
     end
 
 		# list users
 		def index
-			@users = User.sorted_by(@sort_key, @sort_order).paginate(:page => @page, :per_page => 20)
+			@users = User
+				.sorted_by(@sort_attribute, @sort_order)
+				.paginate(:page => @page, :per_page => @per_page)
 			respond_with(@users)
 		end
 
@@ -26,13 +28,15 @@ module Authentication
 		# create new user
 		def create
 			begin
-        user = params[:user]
-				@user = User.create_by(user)
-				flash[:notice] = t(:created)
-				respond_with(@user, :location => users_path)
+				Authentication::User.transaction do
+					user = params[:user]
+					@user = User.create!(user)
+					flash[:notice] = t(:created)
+					respond_with(@user, :location => users_path)
+				end
 
 			rescue ActiveRecord::RecordInvalid => error
-				@user = error.resource
+				@user = error.record
 				respond_with(@user) do |format|
 					format.html { render(:new) }
 				end
@@ -48,14 +52,18 @@ module Authentication
 		# update user
 		def update
 			begin
-        user = params[:user]
-        user.delete!(:password) if user[:password].blank?
-				@user = User.update_by_id(params[:id], user)
-				flash[:notice] = t(:updated)
-				redirect_to(users_path)
+				Authentication::User.transaction do
+					user = params[:user]
+					user.delete!(:password) if user[:password].blank?
+					@user = User.find(params[:id])
+					@user.attributes = user
+					@user.save!
+					flash[:notice] = t(:updated)
+					redirect_to(users_path)
+				end
 
 			rescue ActiveRecord::RecordInvalid => error
-				@user = error.resource
+				@user = error.record
 				respond_with(@user) do |format|
 					format.html { render(:edit) }
 				end
@@ -64,9 +72,12 @@ module Authentication
 
 		# destroy user
 		def destroy
-			@user = User.destroy_by_id(params[:id])
-			flash[:notice] = t(:destroyed)
-			respond_with(@user, :location => users_path)
+			Authentication::User.transaction do
+				@user = User.find(params[:id])
+				@user.destroy
+				flash[:notice] = t(:destroyed)
+				respond_with(@user, :location => users_path)
+			end
 		end
 
 	private

@@ -20,28 +20,5 @@ describe Authentication::Role do
 		it "sorts" do
 			Authentication::Role.sorted_by(:name, :asc)
 		end
-
-		#
-		it "creates by attributes" do
-			attributes = attributes_for(:role)
-			role = Authentication::Role.create_by(attributes)
-			role.should be_valid
-		end
-
-		#
-		it "updates by id" do
-			name = "test"
-			role = create(:role)
-			role = Authentication::Role.update_by_id(role.id, :name => name)
-			role.should be_valid
-			role.name.should == name
-		end
-
-		#
-		it "destroys by id" do
-			role = create(:role)
-			Authentication::Role.destroy_by_id(role.id)
-		end
-
 	end
 end

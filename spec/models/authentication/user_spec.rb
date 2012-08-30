@@ -55,27 +55,5 @@ describe Authentication::User do
 			user = create(:user, :phone_number => phone_number)
 			Authentication::User.with_phone_number
 		end
-
-		#
-		it "creates by params" do
-			params = attributes_for(:user)
-			user = Authentication::User.create_by(params)
-			user.should be_valid
-		end
-
-		#
-		it "updates by id" do
-			phone_number = "9999999999"
-			user = create(:user)
-			user = Authentication::User.update_by_id(user.id, :phone_number => phone_number)
-			user.should be_valid
-			user.phone_number.should == phone_number
-		end
-
-		#
-		it "destroys by id" do
-			user = create(:user)
-			Authentication::User.destroy_by_id(user.id)
-		end
 	end
 end
