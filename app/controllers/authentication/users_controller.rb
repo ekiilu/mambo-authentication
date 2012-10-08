@@ -11,7 +11,7 @@ module Authentication
 
     before_filter(:only => :index) do
     	page_param(:users, 20)
-      sort_param(:users, "", :name, :asc)
+      sort_param(:users, :name, :asc)
     end
 
 		# list users

@@ -11,7 +11,7 @@ module Authentication
 
     before_filter(:only => :index) do
       page_param(:roles, 20)
-      sort_param(:roles, "", :name, :asc)
+      sort_param(:roles, :name, :asc)
     end
 
 		#

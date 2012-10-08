@@ -4,13 +4,13 @@
 
 %table
   %tr
-    = sorted_table_header_tag("", :name) do
+    = sorted_table_header_tag(:name) do
       = t(".name")
 
-    = sorted_table_header_tag("", :desc) do
+    = sorted_table_header_tag(:desc) do
       = t(".desc")
 
-    = sorted_table_header_tag("", :updated_at) do
+    = sorted_table_header_tag(:updated_at) do
       = t(".updated_at")
 
     = table_header_tag(t(".actions"))
