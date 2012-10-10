@@ -36,12 +36,12 @@ module Authentication
 		# class methods
 		#
 		def self.sorted_by(key, order)
-			order("#{key} #{order.to_s.upcase}")
+			order{__send__(key).__send__(order)}
 		end
 
 		#
 		def self.with_phone_number
-			where("phone_number IS NOT NULL AND phone_number != ?", "")
+			where{(phone_number != nil) & (phone_number != '')}
 		end
 
 		# get by credentials

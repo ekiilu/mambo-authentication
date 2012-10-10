@@ -19,7 +19,7 @@ module Authentication
 		# class methods
 		#
 		def self.sorted_by(key, order)
-			order("#{key} #{order.to_s.upcase}")
+			order{__send__(key).__send__(order)}
 		end
 	end
 end
