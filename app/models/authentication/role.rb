@@ -1,8 +1,8 @@
+#-  -*- encoding : utf-8 -*- 
 #- This Source Code Form is subject to the terms of the Mozilla Public
 #- License, v. 2.0. If a copy of the MPL was not distributed with this
 #- file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-# -*- encoding : utf-8 -*-
 module Authentication
 	class Role < ActiveRecord::Base
     # attributes
@@ -17,9 +17,5 @@ module Authentication
 		has_many(:users, :through => :user_roles)
 
 		# class methods
-		#
-		def self.sorted_by(key, order)
-			order{__send__(key).__send__(order)}
-		end
 	end
 end
