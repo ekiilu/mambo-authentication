@@ -1,4 +1,4 @@
-#-  -*- encoding : utf-8 -*- 
+#-  -*- encoding : utf-8 -*-
 #- This Source Code Form is subject to the terms of the Mozilla Public
 #- License, v. 2.0. If a copy of the MPL was not distributed with this
 #- file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,10 +10,10 @@ module Authentication
     attr_reader(:password)
 
 		# validations
-    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w_]*$/)
+    validates(:name, :uniqueness => true, :length => {:in => 2..64}, :format => /^[\w_ ]*$/)
     validates(:email_address, :uniqueness => true, :length => {:maximum => 128}, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)
     validates(:phone_number, :length => {:is => 10}, :format => /^\d*$/, :allow_blank => true)
-		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/, :confirmation => true, :allow_blank => true)
+		validates(:password, :length => {:in => 6..32}, :format => /^\w*$/, :confirmation => true, :if => :password_required?)
 
 		# associations
 		has_many(:user_roles, :dependent => :destroy)
@@ -22,13 +22,17 @@ module Authentication
 		# nested
 		accepts_nested_attributes_for(:user_roles)
 
+		# instance methods
 		def password=(password)
 			return if password.blank?
 			@password = password
 			self.password_digest = User.digest(password)
 		end
 
-		# instance methods
+		def password_required?
+			return self.id.blank?
+		end
+
 		def has_role(role)
 			roles.exists?(:name => role.to_s)
 		end

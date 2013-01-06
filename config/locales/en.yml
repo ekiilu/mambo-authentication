@@ -72,3 +72,6 @@ en:
         email_address: "Email Address"
         phone_number: "Phone Number (for Alerts)"
         password_confirmation: "Confirm Password"
+
+      "authentication/role":
+        desc: "Description"

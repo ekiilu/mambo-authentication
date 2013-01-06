@@ -26,10 +26,10 @@
           = ur.select(:role_id, options_from_collection_for_select(Authentication::Role.all, :id, :desc, :selected => @user.user_roles.first.role_id), {}, :disabled => @user.system)
       %li
         = u.label(:password)
-        = u.password_field(:password)
+        = u.password_field(:password, :required => @user.password_required?)
       %li
         = u.label(:password_confirmation)
-        = u.password_field(:password_confirmation)
+        = u.password_field(:password_confirmation, :required => @user.password_required?)
   %fieldset
     = link_to(t(".cancel"), users_path, :class => "button")
     = u.submit(t(".commit"), :disable_with => t(".commit_disable"))
